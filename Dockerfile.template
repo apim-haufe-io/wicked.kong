@@ -1,0 +1,14 @@
+FROM ${WICKED_KONG_IMAGE}
+
+ENV DOCKERIZE_VERSION v0.2.0
+
+RUN yum install -y epel-release && yum install -y wget \\
+    && yum clean all
+
+RUN wget -nv https://github.com/jwilder/dockerize/releases/download/\$DOCKERIZE_VERSION/dockerize-linux-amd64-\$DOCKERIZE_VERSION.tar.gz \\
+    && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-\$DOCKERIZE_VERSION.tar.gz
+
+COPY config.docker/kong.yml /etc/kong/kong.yml
+
+#CMD [ "kong", "start" ]
+CMD dockerize -wait tcp://kong-database:5432 kong start
