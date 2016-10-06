@@ -1,6 +1,10 @@
 FROM ${WICKED_KONG_IMAGE}
 
 ENV DOCKERIZE_VERSION v0.2.0
+ENV KONG_PG_HOST kong-database
+ENV KONG_PG_USER kong
+ENV KONG_PG_PASSWORD kong
+ENV KONG_DATABASE postgres
 
 RUN yum install -y epel-release && yum install -y wget \\
     && yum clean all
@@ -8,7 +12,8 @@ RUN yum install -y epel-release && yum install -y wget \\
 RUN wget -nv https://github.com/jwilder/dockerize/releases/download/\$DOCKERIZE_VERSION/dockerize-linux-amd64-\$DOCKERIZE_VERSION.tar.gz \\
     && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-\$DOCKERIZE_VERSION.tar.gz
 
-COPY config.docker/kong.yml /etc/kong/kong.yml
+#COPY config.docker/kong.yml /etc/kong/kong.yml
+#COPY config.docker/kong.conf.default /etc/kong/kong.conf.default
 
 #CMD [ "kong", "start" ]
 CMD dockerize -wait tcp://kong-database:5432 kong start
