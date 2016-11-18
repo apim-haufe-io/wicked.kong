@@ -88,10 +88,8 @@ server {
         proxy_pass_header Server;
         proxy_pass $upstream_url;
 
-        proxy_ssl on;
         proxy_ssl_certificate /root/proxy-cert.pem;
         proxy_ssl_certificate_key /root/proxy-key.pem;
-        proxy_ssl_session_reuse on;
 
         header_filter_by_lua_block {
             kong.header_filter()
