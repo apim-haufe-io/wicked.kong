@@ -83,13 +83,15 @@ server {
 
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto https;
+        proxy_set_header X-Forwarded-Proto $scheme;
         proxy_set_header Host $upstream_host;
         proxy_pass_header Server;
         proxy_pass $upstream_url;
 
+        proxy_ssl on;
         proxy_ssl_certificate /root/proxy-cert.pem;
         proxy_ssl_certificate_key /root/proxy-key.pem;
+        proxy_ssl_session_reuse on;
 
         header_filter_by_lua_block {
             kong.header_filter()
