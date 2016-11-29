@@ -12,4 +12,12 @@ else
   echo by defining PROXY_SSL_CERT and PROXY_SSL_KEY.
 fi
 
+if [ ! -z "$KONG_DATABASE_SERVICE_HOST" ]; then
+  echo Kubernetes Mode, picking up database host from env var.
+  unset KONG_PG_HOST
+  export KONG_PG_HOST=$KONG_DATABASE_SERVICE_HOST
+fi
+
+echo Using kong database host: $KONG_PG_HOST
+
 dockerize -wait tcp://kong-database:5432 kong start
