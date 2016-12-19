@@ -1,4 +1,4 @@
-#!/usr/local/bin/dumb-init !/bin/bash
+#!/usr/local/bin/dumb-init /bin/bash
 
 if [ ! -z "$PROXY_SSL_CERT" ] && [ ! -z "$PROXY_SSL_KEY" ]; then
   echo Using certificates from PROXY_SSL_CERT and PROXY_SSL_KEY
