@@ -20,4 +20,4 @@ fi
 
 echo Using kong database host: $KONG_PG_HOST
 
-dockerize -wait tcp://kong-database:5432 kong start
+wait-for-it.sh -h $KONG_PG_HOST -p 5432 -t 30 -- kong start
