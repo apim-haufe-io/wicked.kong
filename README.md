@@ -29,6 +29,7 @@ DOCKER_PREFIX=haufelexware/wicked.
 ## Changelog
 
 * In preparation of migrating wicked to `0.9.x` of Kong, some environment variables were added to the `Dockerfile.template` to match the new configuration experience of Kong.
+* `Dockerfile.template` was removed, it is not used anymore.
 
 ## License
 
