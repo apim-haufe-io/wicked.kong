@@ -2,6 +2,8 @@
 
 set -e
 
+pushd $( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+
 if [ -z "$DOCKER_PREFIX" ]; then
     echo "WARNING: Env var DOCKER_PREFIX not set, assuming haufelexware/wicked."
     export DOCKER_PREFIX="haufelexware/wicked."
@@ -15,6 +17,9 @@ fi
 echo "============================================"
 echo "Building normal image..."
 echo "============================================"
+
+git log -1 --decorate=short > git_last_commit
+git rev-parse --abbrev-ref HEAD > git_branch
 
 export BUILD_ALPINE=""
 normalImageName="${DOCKER_PREFIX}kong:${DOCKER_TAG}"
@@ -62,3 +67,5 @@ else
         echo "WARNING: Unknown parameter '$1'; did you mean --push?"
     fi
 fi
+
+popd

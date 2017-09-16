@@ -2,3 +2,4 @@
 *.pem
 Dockerfile-alpine
 docker-entrypoint.sh
+git_*
