@@ -1,4 +1,4 @@
-FROM kong:0.11.0
+FROM kong:0.11.1
 
 ENV KONG_PG_HOST kong-database
 ENV KONG_PG_USER kong
