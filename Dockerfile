@@ -4,6 +4,10 @@ ENV KONG_PG_HOST kong-database
 ENV KONG_PG_USER kong
 ENV KONG_PG_PASSWORD kong
 ENV KONG_DATABASE postgres
+ENV KONG_ADMIN_ACCESS_LOG "/dev/stdout"
+ENV KONG_ADMIN_ERROR_LOG "/dev/stderr"
+ENV KONG_PROXY_ACCESS_LOG "/dev/stdout"
+ENV KONG_PROXY_ERROR_LOG "/dev/stderr"
 
 RUN yum install -y epel-release && yum install -y wget \
     && yum clean all \
