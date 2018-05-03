@@ -14,6 +14,12 @@ if [ -z "$DOCKER_TAG" ]; then
     export DOCKER_TAG=dev
 fi
 
+noCache=""
+if [ ! -z "${DOCKER_NOCACHE}" ]; then
+    echo "INFO: Building using --no-cache"
+    noCache="--no-cache"
+fi
+
 echo "============================================"
 echo "Building normal image..."
 echo "============================================"
@@ -23,7 +29,7 @@ git rev-parse --abbrev-ref HEAD > git_branch
 
 export BUILD_ALPINE=""
 normalImageName="${DOCKER_PREFIX}kong:${DOCKER_TAG}"
-docker build --pull -t ${normalImageName} .
+docker build --pull -t ${normalImageName} . ${noCache}
 
 # echo "============================================"
 # echo "Building alpine image..."
