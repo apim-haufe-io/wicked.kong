@@ -21,5 +21,6 @@ fi
 echo Using kong database host: $KONG_PG_HOST
 echo Trusting all IPs to send correct X-Forwarded-Proto values
 export KONG_TRUSTED_IPS="0.0.0.0/0,::/0"
+export KONG_ADMIN_LISTEN="0.0.0.0:8001"
 
 wait-for-it.sh -h $KONG_PG_HOST -p 5432 -t 30 -- kong start --run-migrations

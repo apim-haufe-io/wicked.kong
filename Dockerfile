@@ -1,4 +1,4 @@
-FROM kong:0.11.2
+FROM kong:0.13.1-centos
 
 ENV KONG_PG_HOST kong-database
 ENV KONG_PG_USER kong
